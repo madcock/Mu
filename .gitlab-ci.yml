@@ -11,8 +11,8 @@
 # Post extends for mu
 .mu-post-common:
   variables:
-    MAKEFILE_PATH: ./
-    MAKEFILE: makefilelibretro
+    MAKEFILE_PATH: libretroBuildSystem
+    MAKEFILE: Makefile.libretro
 
 # Inclusion templates, required for the build to work
 include:
