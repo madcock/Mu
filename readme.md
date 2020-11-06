@@ -1,9 +1,12 @@
-# Palm OS emulator(Mu)
+# Mu, a Palm OS Emulator
 
-This is a complete restart of my Palm OS emulator, with the last one the code got too messy and the goal too ambitious(to emulate every palm API in software and for compatibility with all Palm OS versions and devices).
-
+The continuation of the RetroArch Core is dedicated to Emily (1998-2020), your
+friendship was very important to me and I hope that you are resting well.
+ -- Your friend, Stephanie
 
 # The goal of this project
+
+This is a complete restart of my Palm OS emulator, with the last one the code got too messy and the goal too ambitious(to emulate every palm API in software and for compatibility with all Palm OS versions and devices).
 
 To emulate every part of the Palm m515 that is used by the OS perfectly.
 This means no hacks like POSE where API calls are intercepted and replaced with those that dont use the actual hardware.
