@@ -1,3 +1,5 @@
+#include "../w86l488.h"
+
 static uint8_t pxa260_io_read_byte(uint32_t addr){
    debugLog("Invalid 8 bit PXA260 register read:0x%08X, PC:0x%08X\n", addr, pxa260GetPc());
    return 0x00;
