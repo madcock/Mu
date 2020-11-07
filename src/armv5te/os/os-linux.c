@@ -15,9 +15,9 @@
     #define MAP_32BIT 0
 #endif
 
-#include "os.h"
-#include "debug.h"
-#include "mmu.h"
+#include "armv5te/os/os.h"
+#include "armv5te/debug.h"
+#include "armv5te/mmu.h"
 
 #ifdef IS_IOS_BUILD
 #include <unistd.h>
