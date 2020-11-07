@@ -1,8 +1,10 @@
 #ifndef PORTABILITY_H
 #define PORTABILITY_H
 
+#include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <limits.h>
 
 //threads
 #if defined(EMU_MULTITHREADED)
