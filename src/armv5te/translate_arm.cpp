@@ -20,14 +20,14 @@
 // it doesn't work that often as the mmaped section is too far away.
 // #define REL_BRANCH
 
-#include "asmcode.h"
-#include "cpu.h"
-#include "cpudefs.h"
-//#include "disasm.h"
-#include "mem.h"
-#include "mmu.h"
-#include "translate.h"
-#include "os/os.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/cpu.h"
+#include "armv5te/cpudefs.h"
+//#include "armv5te/disasm.h"
+#include "armv5te/mem.h"
+#include "armv5te/mmu.h"
+#include "armv5te/translate.h"
+#include "armv5te/os/os.h"
 
 #ifdef __thumb__
 #error Thumb mode is not supported!

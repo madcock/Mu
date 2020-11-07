@@ -21,13 +21,13 @@
 #include <assert.h>
 #include <stdint.h>
 
-#include "asmcode.h"
-#include "cpudefs.h"
-#include "emu.h"
-#include "translate.h"
-#include "mem.h"
-#include "mmu.h"
-#include "os/os.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/cpudefs.h"
+#include "armv5te/emu.h"
+#include "armv5te/translate.h"
+#include "armv5te/mem.h"
+#include "armv5te/mmu.h"
+#include "armv5te/os/os.h"
 
 #ifdef IS_IOS_BUILD
 #include <sys/mman.h>

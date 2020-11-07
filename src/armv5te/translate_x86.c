@@ -1,13 +1,14 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdint.h>
 
-#include "os/os.h"
-#include "emu.h"
-#include "mem.h"
-#include "cpu.h"
-#include "asmcode.h"
-#include "translate.h"
-#include "debug.h"
+#include "armv5te/os/os.h"
+#include "armv5te/emu.h"
+#include "armv5te/mem.h"
+#include "armv5te/cpu.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/translate.h"
+#include "armv5te/debug.h"
 
 extern void translation_enter() __asm__("translation_enter");
 extern void translation_next() __asm__("translation_next");
