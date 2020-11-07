@@ -20,13 +20,6 @@ add_library(MuCorePxa260Experimental STATIC
 target_link_libraries(MuCorePxa260Experimental
 	MuCoreArmV5TEExperimental)
 
-# Some defines are required for this to function properly
-target_compile_definitions(MuCorePxa260Experimental
-	PUBLIC EMU_SUPPORT_PALM_OS5=1
-
-	# forces the dynarec to use accurate mode and disable Nspire OS hacks
-	PUBLIC SUPPORT_LINUX=1)
-
 # Includes for the project
 target_include_directories(MuCorePxa260Experimental PUBLIC
 	"${PROJECT_BINARY_DIR}"

@@ -15,7 +15,7 @@ add_library(MuCore STATIC
 
 # Bring all the sub-modules as needed
 target_link_libraries(MuCore
-	#MuCorePxa260Experimental
+	MuCorePxa260Experimental
 	MuCoreFileLauncher
 	MuCoreAudio
 	MuCoreM68k)
