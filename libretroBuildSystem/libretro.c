@@ -13,10 +13,10 @@
 #include <streams/file_stream.h>
 #include <string/stdstring.h>
 
-#include "../src/emulator.h"
-#include "../src/portability.h"
-#include "../src/silkscreen.h"
-#include "../src/fileLauncher/launcher.h"
+#include "emulator.h"
+#include "portability.h"
+#include "silkscreen.h"
+#include "fileLauncher/launcher.h"
 #include "cursors.h"
 
 
@@ -213,7 +213,7 @@ void retro_get_system_info(struct retro_system_info *info){
 #ifndef GIT_VERSION
 #define GIT_VERSION ""
 #endif
-   info->library_version  = "v1.1.0" GIT_VERSION;
+   info->library_version  = "v1.2.0" GIT_VERSION;
    info->need_fullpath    = true;
    info->valid_extensions = "prc|pqa|img";
 }

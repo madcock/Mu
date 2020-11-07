@@ -18,4 +18,10 @@
 /tools/desktop/build-BufferGraphViewer-*
 /tools/desktop/build-MakePalmBitmap-*
 /tools/desktop/export16BitImageProperly/convert
+
+# CLion
 .idea/workspace.xml
+
+# CMake
+cmake-build-debug/
+cmake-build-release/

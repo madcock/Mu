@@ -16,12 +16,10 @@
 #endif
 
 #include "os.h"
-#include "../debug.h"
-#include "../mmu.h"
-
+#include "debug.h"
+#include "mmu.h"
 
 #ifdef IS_IOS_BUILD
-
 #include <unistd.h>
 #include <sys/sysctl.h>
 

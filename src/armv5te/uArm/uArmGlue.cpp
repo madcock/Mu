@@ -1,11 +1,11 @@
-#include "uArmGlue.h"
-#include "CPU_2.h"
+#include "armv5te/uArm/uArmGlue.h"
+#include "armv5te/uArm/CPU_2.h"
 
-#include "../../emulator.h"
-#include "../../armv5te/cpu.h"
-#include "../../armv5te/asmcode.h"
-#include "../../armv5te/cpudefs.h"
-#include "../../pxa260/pxa260.h"
+#include "emulator.h"
+#include "armv5te/cpu.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/cpudefs.h"
+#include "pxa260/pxa260.h"
 
 
 static ArmCoprocessor uArmCp14;

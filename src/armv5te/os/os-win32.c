@@ -1,4 +1,4 @@
-#include "os.h"
+#include "os/os.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <assert.h>
@@ -9,8 +9,8 @@
 #include <fcntl.h>
 #include <share.h>
 
-#include "../emu.h"
-#include "../mmu.h"
+#include "emu.h"
+#include "mmu.h"
 
 void *os_reserve(size_t size)
 {

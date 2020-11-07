@@ -1,0 +1,45 @@
+# Experimental ARM V5TE Module
+add_library(MuCoreArmV5TEExperimental STATIC
+	uArm/CPU_2.c
+	uArm/icache.c
+	uArm/uArmGlue.cpp
+	arm_interpreter.cpp
+	asmcode.c
+	coproc.cpp
+	cpu.cpp
+	disasm.c
+	emuVarPool.c
+	mem.c
+	mmu.c
+	thumb_interpreter.cpp)
+
+if(CMAKE_SYSTEM_PROCESSOR MATCHES aarch64)
+	target_sources(MuCoreArmV5TEExperimental PUBLIC
+		translate_aarch64.cpp)
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES arm)
+	target_sources(MuCoreArmV5TEExperimental PUBLIC
+		translate_arm.cpp)
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "(x86)|(X86)|(i386)")
+	target_sources(MuCoreArmV5TEExperimental PUBLIC
+		translate_x86.c)
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "(x86_64)|(x86-64)|(amd64)|(AMD64)")
+	target_sources(MuCoreArmV5TEExperimental PUBLIC
+		translate_x86_64.c)
+endif()
+
+# Windows?
+if(CMAKE_SYSTEM_NAME STREQUAL Windows)
+	target_sources(MuCoreArmV5TEExperimental PUBLIC
+		os/os-win32.c)
+
+# Everything else?
+else()
+	target_sources(MuCoreArmV5TEExperimental PUBLIC
+		os/os-linux.c)
+endif()
+
+# Includes for the project
+target_include_directories(MuCoreArmV5TEExperimental PUBLIC
+	"${PROJECT_BINARY_DIR}"
+	"${PROJECT_SOURCE_DIR}/include"
+	"${PROJECT_SOURCE_DIR}/include/armv5te")
