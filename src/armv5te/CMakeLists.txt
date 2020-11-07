@@ -61,5 +61,4 @@ endif()
 # Includes for the project
 target_include_directories(MuCoreArmV5TEExperimental PUBLIC
 	"${PROJECT_BINARY_DIR}"
-	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/include/armv5te")
+	"${PROJECT_SOURCE_DIR}/include")

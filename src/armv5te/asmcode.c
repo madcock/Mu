@@ -1,7 +1,7 @@
-#include "asmcode.h"
-#include "debug.h"
-#include "mmu.h"
-#include "mem.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/debug.h"
+#include "armv5te/mmu.h"
+#include "armv5te/mem.h"
 
 //TODO: Read breakpoints, alignment checks
 

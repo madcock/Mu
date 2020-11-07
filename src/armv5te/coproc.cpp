@@ -1,10 +1,10 @@
-#include "cpu.h"
-#include "cpudefs.h"
-#include "mmu.h"
+#include "armv5te/cpu.h"
+#include "armv5te/cpudefs.h"
+#include "armv5te/mmu.h"
 
 extern "C" {
-#include "../pxa260/pxa260.h"
-#include "../pxa260/pxa260_PwrClk.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_PwrClk.h"
 }
 
 

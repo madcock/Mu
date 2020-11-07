@@ -23,5 +23,4 @@ target_link_libraries(MuCorePxa260Experimental
 # Includes for the project
 target_include_directories(MuCorePxa260Experimental PUBLIC
 	"${PROJECT_BINARY_DIR}"
-	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/include/pxa260")
+	"${PROJECT_SOURCE_DIR}/include")

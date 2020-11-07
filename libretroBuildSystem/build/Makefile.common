@@ -2,17 +2,10 @@ EMU_PATH := $(CORE_DIR)/../src
 LIBRETRO_COMM_DIR := $(CORE_DIR)/libretro-common
 COREDEFINES :=
 
-INCFLAGS += -I$(CORE_DIR)/../include \
-	-I$(CORE_DIR)/../include/m68k \
-	-I$(CORE_DIR)/../include/audio \
-	-I$(CORE_DIR)/../include/fileLauncher \
-	-I$(CORE_DIR)/../include/pxa260 \
-	-I$(CORE_DIR)/../include/armv5te
-
 # my first make function!!!
 CHECK_ALL = $(strip $(foreach v,$(2),$(if $(findstring $(v),$(1)),$(v),)))
 
-INCFLAGS := -I$(LIBRETRO_COMM_DIR)/include
+INCFLAGS := -I$(CORE_DIR)/../include -I$(LIBRETRO_COMM_DIR)/include
 
 ifeq ($(DEBUG), 1)
 	COREDEFINES += -DEMU_DEBUG

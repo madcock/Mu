@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#include "debug.h"
-#include "disasm.h"
-#include "emu.h"
+#include "armv5te/debug.h"
+#include "armv5te/disasm.h"
+#include "armv5te/emu.h"
 
 
 char disasmReturnBuf[80];

@@ -1,6 +1,6 @@
 #include "pxa260/pxa260_types.h"
-#include "uArm/CPU_2.h"
-#include "uArm/icache.h"
+#include "armv5te/uArm/CPU_2.h"
+#include "armv5te/uArm/icache.h"
 
 //#define ICACHE_DEBUGGING
 

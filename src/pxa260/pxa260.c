@@ -1,35 +1,35 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "pxa260.h"
-#include "pxa260_DMA.h"
-#include "pxa260_DSP.h"
-#include "pxa260_GPIO.h"
-#include "pxa260_IC.h"
-#include "pxa260_LCD.h"
-#include "pxa260_PwrClk.h"
-#include "pxa260_RTC.h"
-#include "pxa260_TIMR.h"
-#include "pxa260_UART.h"
-#include "pxa260I2c.h"
-#include "pxa260Memctrl.h"
-#include "pxa260Ssp.h"
-#include "pxa260Udc.h"
-#include "pxa260Timing.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_DMA.h"
+#include "pxa260/pxa260_DSP.h"
+#include "pxa260/pxa260_GPIO.h"
+#include "pxa260/pxa260_IC.h"
+#include "pxa260/pxa260_LCD.h"
+#include "pxa260/pxa260_PwrClk.h"
+#include "pxa260/pxa260_RTC.h"
+#include "pxa260/pxa260_TIMR.h"
+#include "pxa260/pxa260_UART.h"
+#include "pxa260/pxa260I2c.h"
+#include "pxa260/pxa260Memctrl.h"
+#include "pxa260/pxa260Ssp.h"
+#include "pxa260/pxa260Udc.h"
+#include "pxa260/pxa260Timing.h"
 #if !defined(EMU_NO_SAFETY)
-#include "../armv5te/uArm/CPU_2.h"
-#include "../armv5te/uArm/uArmGlue.h"
+#include "armv5te/uArm/CPU_2.h"
+#include "armv5te/uArm/uArmGlue.h"
 #endif
-#include "../armv5te/cpu.h"
-#include "../armv5te/emu.h"
-#include "../armv5te/mem.h"
-#include "../armv5te/mmu.h"
-#include "../armv5te/os/os.h"
-#include "../armv5te/translate.h"
-#include "../tungstenT3Bus.h"
-#include "../tsc2101.h"
-#include "../tps65010.h"
-#include "../emulator.h"
+#include "armv5te/cpu.h"
+#include "armv5te/emu.h"
+#include "armv5te/mem.h"
+#include "armv5te/mmu.h"
+#include "armv5te/os/os.h"
+#include "armv5te/translate.h"
+#include "tungstenT3Bus.h"
+#include "tsc2101.h"
+#include "tps65010.h"
+#include "emulator.h"
 
 
 #define PXA260_IO_BASE 0x40000000
@@ -49,7 +49,7 @@ Pxa260timr   pxa260Timer;
 static Pxa260lcd  pxa260Lcd;
 
 
-#include "pxa260Accessors.c.h"
+#include "pxa260/pxa260Accessors.c.h"
 
 bool pxa260Init(uint8_t** returnRom, uint8_t** returnRam){
    uint32_t mem_offset = 0;

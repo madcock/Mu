@@ -1,12 +1,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#include "pxa260.h"
-#include "pxa260_IC.h"
-#include "pxa260Timing.h"
-#include "pxa260I2c.h"
-#include "../emulator.h"
-#include "../tps65010.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_IC.h"
+#include "pxa260/pxa260Timing.h"
+#include "pxa260/pxa260I2c.h"
+#include "emulator.h"
+#include "tps65010.h"
 
 
 #define PXA260_I2C_TRANSFER_DURATION 200

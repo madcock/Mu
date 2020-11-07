@@ -10,7 +10,7 @@
 */
 
 
-#include "uArm/CPU_2.h"
+#include "armv5te/uArm/CPU_2.h"
 #include "pxa260/pxa260_math64.h"
 
 

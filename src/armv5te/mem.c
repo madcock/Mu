@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "emu.h"
-#include "os/os.h"
-#include "mem.h"
-#include "translate.h"
+#include "armv5te/emu.h"
+#include "armv5te/os/os.h"
+#include "armv5te/mem.h"
+#include "armv5te/translate.h"
 
 uint8_t   (*read_byte_map[64])(uint32_t addr);
 uint16_t  (*read_half_map[64])(uint32_t addr);

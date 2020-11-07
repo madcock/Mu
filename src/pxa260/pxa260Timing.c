@@ -2,20 +2,20 @@
 #include <string.h>
 #include <setjmp.h>
 
-#include "pxa260.h"
-#include "pxa260_TIMR.h"
-#include "pxa260I2c.h"
-#include "pxa260Ssp.h"
-#include "pxa260Udc.h"
-#include "pxa260Timing.h"
-#include "../tsc2101.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_TIMR.h"
+#include "pxa260/pxa260I2c.h"
+#include "pxa260/pxa260Ssp.h"
+#include "pxa260/pxa260Udc.h"
+#include "pxa260/pxa260Timing.h"
+#include "tsc2101.h"
 #if !defined(EMU_NO_SAFETY)
-#include "../armv5te/uArm/CPU_2.h"
+#include "armv5te/uArm/CPU_2.h"
 #endif
-#include "../armv5te/os/os.h"
-#include "../armv5te/emu.h"
-#include "../armv5te/cpu.h"
-#include "../emulator.h"
+#include "armv5te/os/os.h"
+#include "armv5te/emu.h"
+#include "armv5te/cpu.h"
+#include "emulator.h"
 
 
 #define PXA260_TIMING_NEVER 0xFFFFFFFF

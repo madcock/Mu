@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../emulator.h"
-#include "../portability.h"
-#include "../m68k/m68k.h"
-#include "../m68k/m68kcpu.h"
-#include "../dbvz.h"
-#include "launcher.h"
+#include "emulator.h"
+#include "portability.h"
+#include "m68k/m68k.h"
+#include "m68k/m68kcpu.h"
+#include "dbvz.h"
+#include "fileLauncher/launcher.h"
 
 
 typedef struct{

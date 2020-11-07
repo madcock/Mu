@@ -1,16 +1,16 @@
 #include <string.h>
 #include <stdint.h>
-#include "translate.h"
-#include "emu.h"
-#include "cpu.h"
-#include "mmu.h"
-#include "mem.h"
-#include "os/os.h"
+#include "armv5te/translate.h"
+#include "armv5te/emu.h"
+#include "armv5te/cpu.h"
+#include "armv5te/mmu.h"
+#include "armv5te/mem.h"
+#include "armv5te/os/os.h"
 
 #if !defined(EMU_NO_SAFETY)
-#include "uArm/CPU_2.h"
-#include "uArm/icache.h"
-#include "../pxa260/pxa260.h"
+#include "armv5te/uArm/CPU_2.h"
+#include "armv5te/uArm/icache.h"
+#include "pxa260/pxa260.h"
 #endif
 
 /* Copy of translation table in memory (hack to approximate effect of having a TLB) */

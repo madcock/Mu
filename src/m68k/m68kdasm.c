@@ -37,7 +37,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "m68k.h"
+#include "m68k/m68k.h"
 
 #ifndef DECL_SPEC
 #define DECL_SPEC

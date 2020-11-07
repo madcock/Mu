@@ -1,6 +1,6 @@
-#include "pxa260.h"
-#include "pxa260_TIMR.h"
-#include "../emulator.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_TIMR.h"
+#include "emulator.h"
 
 
 static void pxa260timrPrvRaiseLowerInts(Pxa260timr* timr){

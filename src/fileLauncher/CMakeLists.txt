@@ -5,5 +5,4 @@ add_library(MuCoreFileLauncher STATIC
 # Includes for the project
 target_include_directories(MuCoreFileLauncher PUBLIC
 	"${PROJECT_BINARY_DIR}"
-	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/include/fileLauncher")
+	"${PROJECT_SOURCE_DIR}/include")

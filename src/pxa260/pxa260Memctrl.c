@@ -1,6 +1,6 @@
 #include <stdint.h>
 
-#include "../emulator.h"
+#include "emulator.h"
 
 
 //this file does nothing execpt manage the MEMCTRL register memory, timings are not emulated

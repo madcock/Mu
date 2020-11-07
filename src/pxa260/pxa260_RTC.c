@@ -1,5 +1,5 @@
-#include "pxa260.h"
-#include "pxa260_RTC.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_RTC.h"
 
 #include <sys/time.h>
 

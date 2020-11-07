@@ -1,5 +1,5 @@
-#include "pxa260.h"
-#include "pxa260_DMA.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_DMA.h"
 
 #define REG_DAR 	0
 #define REG_SAR 	1

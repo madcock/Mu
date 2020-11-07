@@ -5,5 +5,4 @@ add_library(MuCoreAudio STATIC
 # Includes for the project
 target_include_directories(MuCoreAudio PUBLIC
 	"${PROJECT_BINARY_DIR}"
-	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/include/audio")
+	"${PROJECT_SOURCE_DIR}/include")

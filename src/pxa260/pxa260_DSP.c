@@ -1,7 +1,7 @@
-#include "pxa260_math64.h"
-#include "pxa260_CPU.h"
-#include "pxa260_DSP.h"
-#include "pxa260.h"
+#include "pxa260/pxa260_math64.h"
+#include "pxa260/pxa260_CPU.h"
+#include "pxa260/pxa260_DSP.h"
+#include "pxa260/pxa260.h"
 
 
 Boolean pxa260dspAccess(void* userData, Boolean MRRC, UInt8 op, UInt8 RdLo, UInt8 RdHi, UInt8 acc){

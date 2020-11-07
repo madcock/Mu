@@ -1,6 +1,6 @@
-#include "pxa260_IC.h"
-#include "pxa260_CPU.h"
-#include "pxa260.h"
+#include "pxa260/pxa260_IC.h"
+#include "pxa260/pxa260_CPU.h"
+#include "pxa260/pxa260.h"
 
 
 static void pxa260icPrvHandleChanges(Pxa260ic* ic){

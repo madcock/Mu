@@ -1,6 +1,6 @@
-#include "pxa260_LCD.h"
-#include "pxa260.h"
-#include "../armv5te/mem.h"
+#include "pxa260/pxa260_LCD.h"
+#include "pxa260/pxa260.h"
+#include "armv5te/mem.h"
 
 #define UNMASKABLE_INTS		0x7C8E
 

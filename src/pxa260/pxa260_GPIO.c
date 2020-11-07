@@ -1,7 +1,7 @@
-#include "pxa260.h"
-#include "pxa260_GPIO.h"
-#include "../tsc2101.h"
-#include "../emulator.h"
+#include "pxa260/pxa260.h"
+#include "pxa260/pxa260_GPIO.h"
+#include "tsc2101.h"
+#include "emulator.h"
 
 
 static void pxa260gpioOnOutputPinUpdated(Pxa260gpio* gpio, UInt8 gpioNum){

@@ -3,7 +3,7 @@
 /* ======================================================================== */
 
 #include <stdint.h>
-#include "m68kops.h"
+#include "m68k/m68kops.h"
 
 #define NUM_CPU_TYPES 3
 

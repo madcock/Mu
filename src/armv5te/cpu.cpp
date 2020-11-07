@@ -9,15 +9,15 @@
     #include <time.h>
 #endif
 
-#include "armsnippets.h"
-#include "asmcode.h"
-#include "cpu.h"
-#include "cpudefs.h"
-#include "debug.h"
-#include "emu.h"
-#include "mem.h"
-#include "mmu.h"
-#include "translate.h"
+#include "armv5te/armsnippets.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/cpu.h"
+#include "armv5te/cpudefs.h"
+#include "armv5te/debug.h"
+#include "armv5te/emu.h"
+#include "armv5te/mem.h"
+#include "armv5te/mmu.h"
+#include "armv5te/translate.h"
 
 // Global CPU state
 struct arm_state arm;

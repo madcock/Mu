@@ -3,9 +3,9 @@
 #include <stdint.h>
 #include <setjmp.h>
 
-#include "cpu.h"
-#include "mem.h"
-#include "emu.h"
+#include "armv5te/cpu.h"
+#include "armv5te/mem.h"
+#include "armv5te/emu.h"
 
 
 /* cycle_count_delta is a (usually negative) number telling what the time is relative

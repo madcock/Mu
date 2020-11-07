@@ -1,10 +1,10 @@
 #include <assert.h>
 
-#include "asmcode.h"
-#include "cpu.h"
-#include "cpudefs.h"
-#include "debug.h"
-#include "mmu.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/cpu.h"
+#include "armv5te/cpudefs.h"
+#include "armv5te/debug.h"
+#include "armv5te/mmu.h"
 
 // Detect overflow after an addition or subtraction
 #define ADD_OVERFLOW(left, right, sum) ((int32_t)(((left) ^ (sum)) & ((right) ^ (sum))) < 0)

@@ -1,9 +1,9 @@
-#include "asmcode.h"
-#include "cpu.h"
-#include "debug.h"
-#include "emu.h"
-#include "mem.h"
-#include "mmu.h"
+#include "armv5te/asmcode.h"
+#include "armv5te/cpu.h"
+#include "armv5te/debug.h"
+#include "armv5te/emu.h"
+#include "armv5te/mem.h"
+#include "armv5te/mmu.h"
 
 static uint32_t shift(int type, uint32_t res, uint32_t count, int setcc) {
     //TODO: Verify!

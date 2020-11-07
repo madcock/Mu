@@ -10,5 +10,4 @@ add_library(MuCoreM68k STATIC
 # Includes for the project
 target_include_directories(MuCoreM68k PUBLIC
 	"${PROJECT_BINARY_DIR}"
-	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/include/m68k")
+	"${PROJECT_SOURCE_DIR}/include")
