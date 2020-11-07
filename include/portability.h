@@ -27,6 +27,15 @@
 #define likely_equal(x, y) x
 #endif
 
+// PS2 is lacking intmax_t and uintmax_t!
+#if defined(PS2) && !defined(UINTMAX_MAX)
+	typedef intmax_t signed long long int;
+	typedef uintmax_t unsigned long long int;
+
+	#define INTMAX_MAX LONG_LONG_MAX
+	#define UINTMAX_MAX ULONG_LONG_MAX
+#endif
+
 //endian
 #define SWAP_16(x) ((uint16_t)((((uint16_t)(x) & 0x00FF) << 8) | (((uint16_t)(x) & 0xFF00) >> 8)))
 #define SWAP_32(x) ((uint32_t)((((uint32_t)(x) & 0x000000FF) << 24) | (((uint32_t)(x) & 0x0000FF00) <<  8) | (((uint32_t)(x) & 0x00FF0000) >>  8) | (((uint32_t)(x) & 0xFF000000) >> 24)))
