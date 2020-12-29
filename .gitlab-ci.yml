@@ -55,10 +55,6 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/libnx-static.yml'
 
-  # Nintendo Wii U
-  - project: 'libretro-infrastructure/ci-templates'
-    file: '/wiiu-static.yml'
-
   # PLayStation 2
   - project: 'libretro-infrastructure/ci-templates'
     file: '/ps2-static.yml'
