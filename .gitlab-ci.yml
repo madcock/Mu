@@ -150,7 +150,7 @@ libretro-build-dingux:
     - .core-defs
 
 # Nintendo 3DS
-libretro-build-3ds:
+libretro-build-ctr:
   extends:
     - .libretro-ctr-static-retroarch-master
     - .core-defs
