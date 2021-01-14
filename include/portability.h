@@ -28,7 +28,7 @@
 #endif
 
 // PS2 is lacking intmax_t and uintmax_t!
-#if defined(PS2) && !defined(UINTMAX_MAX)
+#if !defined(UINTMAX_MAX)
 	typedef intmax_t signed long long int;
 	typedef uintmax_t unsigned long long int;
 
