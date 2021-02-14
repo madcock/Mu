@@ -577,8 +577,8 @@ bool retro_load_game(const struct retro_game_info *info){
       if(runningImgFile){
          char infoPath[PATH_MAX_LENGTH];
          struct RFILE* infoFile;
-         uint8_t* infoData = NULL;
-         uint32_t infoSize;
+         uint8_t* infoData     = NULL;
+         uint32_t infoSize     = 0;
          sd_card_info_t sdInfo;
          
          memset(&sdInfo, 0x00, sizeof(sdInfo));
