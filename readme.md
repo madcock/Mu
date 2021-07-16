@@ -43,14 +43,29 @@ Make sure you have done all the steps here https://docs.libretro.com/ under "For
     make
 
 #### For Qt
-Install Qt 5.11.1 and Qt Creator(optional) if not installed  
-Open the .pro file in Qt Creator and click "Run" or build from command line
 
-##### To build without Qt Creator(untested)
+First install _Qt 5.14.2_, you may optional install as well _Qt Creator_.
 
-    cd ./qtBuildSystem/Mu
-    qmake
-    make
+ * Windows: <https://download.qt.io/archive/qt/5.14/5.14.2/qt-opensource-windows-x86-5.14.2.exe>
+ * Mac: <https://download.qt.io/archive/qt/5.14/5.14.2/qt-opensource-mac-x64-5.14.2.dmg>
+ * Linux: <https://download.qt.io/archive/qt/5.14/5.14.2/qt-opensource-linux-x64-5.14.2.run>
+
+When running _CMake_ you will need to pass `-DCMAKE_PREFIX_PATH` to the
+location of `Qt5Config.cmake`.
+
+ * With _Qt 5.14.2_ on Windows building with...
+   * mingw-w64: `C:\qt\Qt5.14.2\5.14.2\mingw73_64\lib\cmake\Qt5`
+   * Visual Studio: `C:\qt\Qt5.14.2\5.14.2\msvc2017_64\lib\cmake\Qt5`
+
+If you are using CLion, you may need to go into _Settings_ ->
+_Build, Execution, Deployment_ -> _CMake_ and add it to _CMake Options_.
+
+For Qt Creator, open the `.pro` file and click "Run" or build from
+command line.
+
+If you get `error: 'thread' in namespace 'std' does not name a type` while
+trying to build the Qt Project then you should install the _POSIX Threaded_
+variant of Mingw-w64 and not the _Win32 Threaded_ variant.
 
 #### TestSuite for Palm OS
 Install prc-tools from the below link(self compiled or prepackaged VM)  

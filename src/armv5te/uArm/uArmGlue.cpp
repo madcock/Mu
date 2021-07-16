@@ -5,7 +5,10 @@
 #include "armv5te/cpu.h"
 #include "armv5te/asmcode.h"
 #include "armv5te/cpudefs.h"
-#include "pxa260/pxa260.h"
+
+extern "C" {
+	#include "pxa260/pxa260.h"
+}
 
 
 static ArmCoprocessor uArmCp14;

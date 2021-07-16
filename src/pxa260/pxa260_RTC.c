@@ -1,17 +1,34 @@
+#if !defined(_MSC_VER)
+	#include <sys/time.h>
+#else
+	#include <windows.h>
+	#include <sysinfoapi.h>
+#endif
+
 #include "pxa260/pxa260.h"
 #include "pxa260/pxa260_RTC.h"
 
-#include <sys/time.h>
-
-
-
 static UInt32 rtcCurTime(void){
+#if !defined(_MSC_VER)
+	struct timeval tv;
 
-   struct timeval tv;
+	gettimeofday(&tv, NULL);
 
-   gettimeofday(&tv, NULL);
+	return tv.tv_sec;
+#else
+	FILETIME ftFiletime;
+	uint64_t sTime;
 
-   return tv.tv_sec;
+	// https://docs.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-filetime
+	GetSystemTimeAsFileTime(&ftFiletime);
+
+	sTime = (((uint64_t)ftFiletime.dwHighDateTime) << UINT64_C(32)) |
+			(((uint64_t)ftFiletime.dwLowDateTime) & UINT64_C(0xFFFFFFFF));
+
+	// To microseconds -> NT Epoch to UNIX Epoch -> Seconds
+	return (((sTime / UINT64_C(10)) - UINT64_C(11644473600000000))) /
+		UINT64_C(1000000);
+#endif
 }
 
 void pxa260rtcPrvUpdate(Pxa260rtc* rtc){

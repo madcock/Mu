@@ -7,8 +7,14 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "fixings.h"
+
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#if defined(_MSC_VER)
+__pragma(pack(push, 1))
 #endif
 
 typedef struct arm_state {  // Remember to update asmcode.S if this gets rearranged
@@ -41,10 +47,16 @@ typedef struct arm_state {  // Remember to update asmcode.S if this gets rearran
     uint8_t  interrupts;
     uint32_t cpu_events_state; // Only used for suspend and resume!
 }
-#ifndef __EMSCRIPTEN__
+
+#if !defined(__EMSCRIPTEN__) && !defined(_MSC_VER)
 __attribute__((packed))
 #endif
 arm_state;
+
+#if defined(_MSC_VER)
+__pragma(pack(pop))
+#endif
+
 extern struct arm_state arm __asm__("arm");
 
 #define MODE_USR 0x10

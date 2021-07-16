@@ -9,7 +9,11 @@
 #include <atomic>
 #include <stdint.h>
 
-#include "../../src/emulator.h"
+#if defined(BUILT_FROM_CMAKE)
+	#include "emulator.h"
+#else
+	#include "../../include/emulator.h"
+#endif
 
 class EmuWrapper{
 private:

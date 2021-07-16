@@ -5,12 +5,15 @@ project(Mu
 	HOMEPAGE_URL https://github.com/libretro/Mu
 	LANGUAGES C CXX)
 
-# Build properties for Mu
+# Requires C99
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_STANDARD_REQUIRED True)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # Main project sources
 add_subdirectory(src)
 
 # LibRetro Build
 add_subdirectory(libretroBuildSystem)
+
+# QT Build
+add_subdirectory(qtBuildSystem)

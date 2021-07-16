@@ -8,6 +8,7 @@
 #include <QDate>
 #include <QTime>
 
+#include <thread>
 #include <new>
 #include <chrono>
 #include <thread>
@@ -17,14 +18,27 @@
 #include <time.h>
 
 #include "emuwrapper.h"
-#include "../../src/emulator.h"
-#include "../../src/fileLauncher/launcher.h"
 
-extern "C"{
-#include "../../src/flx68000.h"
-#include "../../src/m68k/m68k.h"
-#include "../../src/pxa260/pxa260.h"
-#include "../../src/armv5te/disasm.h"
+#if defined(BUILT_FROM_CMAKE)
+	#include "emulator.h"
+	#include "fileLauncher/launcher.h"
+#else
+	#include "../../include/emulator.h"
+	#include "../../include/fileLauncher/launcher.h"
+#endif
+
+extern "C" {
+#if defined(BUILT_FROM_CMAKE)
+	#include "flx68000.h"
+	#include "m68k/m68k.h"
+	#include "pxa260/pxa260.h"
+	#include "armv5te/disasm.h"
+#else
+	#include "../../include/flx68000.h"
+	#include "../../include/m68k/m68k.h"
+	#include "../../include/pxa260/pxa260.h"
+	#include "../../include/armv5te/disasm.h"
+#endif
 }
 
 

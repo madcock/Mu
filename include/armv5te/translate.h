@@ -6,8 +6,14 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#include "fixings.h"
+
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#if defined(_MSC_VER)
+__pragma(pack(push, 1))
 #endif
 
 struct translation {
@@ -15,7 +21,16 @@ struct translation {
     void** jump_table;
     uint32_t *start_ptr;
     uint32_t *end_ptr;
-} __attribute__((packed));
+}
+#if !defined(_MSC_VER)
+__attribute__((packed))
+#endif
+;
+
+#if defined(_MSC_VER)
+__pragma(pack(pop))
+#endif
+
 extern struct translation translation_table[] __asm__("translation_table");
 #define INSN_BUFFER_SIZE 0x1000000
 
