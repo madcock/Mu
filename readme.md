@@ -36,7 +36,17 @@ https://www.flaticon.com/free-icon/cow_235371#term=cow&page=1&position=13 (muExp
 https://findicons.com/icon/164302/cursor (Libretro Port Joystick Cursor)
 
 ## Building
+
+#### Using CMake
+
+Using CMake, you just need to do:
+
+ * `cmake .`
+ * `mkdir output`
+ * `cmake --build output`
+
 #### For RetroArch
+
 Make sure you have done all the steps here https://docs.libretro.com/ under "For Developers/Compilation" so you build environment works.  
 
     cd ./libretroBuildSystem

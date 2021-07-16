@@ -32,3 +32,9 @@ cmake-build-debug-visual-studio/
 cmake-build-release-visual-studio/
 cmake-build-debug-visual-studio-1/
 cmake-build-release-visual-studio-1/
+
+# Test ROM
+userdata-palmos41-en-m515.ram
+userdata-en-m515.ram
+palmos41-en-m515.rom
+default-palmos41-en-m515.ram
