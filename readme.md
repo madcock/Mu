@@ -1,7 +1,8 @@
 # Mu, a Palm OS Emulator
 
-The continuation of the RetroArch Core is dedicated to Emily (1998-2020), your
-friendship was very important to me and I hope that you are resting well.
+The continuation of the Mu along with the RetroArch Core is dedicated to
+Emily (1998-2020), your friendship was very important to me and I hope
+that you are resting well.
  -- Your friend, Stephanie
 
 # The goal of this project
@@ -42,8 +43,8 @@ https://findicons.com/icon/164302/cursor (Libretro Port Joystick Cursor)
 Using CMake, you just need to do:
 
  * `cmake .`
- * `mkdir output`
- * `cmake --build output`
+ * `cmake --build .`
+   * You may specify a CMake target.
 
 #### For RetroArch
 

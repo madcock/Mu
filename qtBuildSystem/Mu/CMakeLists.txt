@@ -46,9 +46,13 @@ add_definitions(-DBUILT_FROM_CMAKE)
 # Annoying Visual Studio Warnings
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 
+# Needed for GCC
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 # Need to link into all these Qt components
 target_link_libraries(QtMu
-	MuCore
+	MuCore Threads::Threads
 	Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Multimedia Qt5::Svg)
 
 # Deployment for Windows
