@@ -6,6 +6,13 @@ set(CMAKE_AUTOMOC ON)
 # We need all the Qt5 libraries
 find_package(Qt5 OPTIONAL_COMPONENTS Core Gui Widgets Multimedia Svg)
 
+# Application Icon for Mu
+if(WIN32)
+	set(MU_APP_RESOURCES "${CMAKE_CURRENT_SOURCE_DIR}/windows/app.rc")
+else()
+	set(MU_APP_RESOURCES)
+endif()
+
 # Setup executable for running
 add_executable(QtMu
 	debugviewer.cpp
@@ -24,7 +31,8 @@ add_executable(QtMu
 	statemanager.cpp
 	statemanager.ui
 	touchscreen.h
-	touchscreen.cpp)
+	touchscreen.cpp
+	${MU_APP_RESOURCES})
 
 # The Qt build requires modern-ish C++11
 set_target_properties(QtMu PROPERTIES

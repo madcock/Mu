@@ -1,0 +1,32 @@
+#include <windows.h>
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION 1,3,0,0
+PRODUCTVERSION 1,3,0,0
+FILEOS VOS__WINDOWS32
+FILETYPE VFT_APP
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK "040904E4"
+		BEGIN
+			VALUE "CompanyName",      "Mu\0"
+			VALUE "FileDescription",  "Non-commercial Palm OS emulator.\0"
+			VALUE "FileVersion",      "1.3\0"
+			VALUE "InternalName",     "Mu\0"
+			VALUE "LegalCopyright",   "CC BY-NC 3.0 US: Emily (meepingsnesroms), Stephanie Gawroriski\0"
+			VALUE "LegalTrademarks1", "CC BY-NC 3.0 US: Emily (meepingsnesroms), Stephanie Gawroriski\0"
+			VALUE "LegalTrademarks2", "CC BY-NC 3.0 US: Emily (meepingsnesroms), Stephanie Gawroriski\0"
+			VALUE "OriginalFilename", "QtMu.exe\0"
+			VALUE "ProductName",      "Mu\0"
+			VALUE "ProductVersion",   "1.3\0"
+		END
+	END
+
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x409, 1252
+	END
+END
+
+id ICON "Mu.ico"

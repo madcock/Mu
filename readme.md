@@ -103,7 +103,7 @@ bootloader-dbvz.rom: 9da101cd2317830649a31f8fa46debec (MD5)
  3. (Optional)Copy "bootloader-en-m515.rom" to "~/Mu"
  4. Run emu and press start button
 
- #### For RetroArch
+#### For RetroArch
  1. Download "Palm OS(Mu)" from "Online Updater->Core Updater"
  2. Go back, select "Load Core", select "Palm OS(Mu)"
  3. Copy "palmos41-en-m515.rom" and "palmos52-en-t3.rom" to the RetroArch system directory
@@ -114,6 +114,12 @@ bootloader-dbvz.rom: 9da101cd2317830649a31f8fa46debec (MD5)
 [Prc-tools, Palm OS SDKs, pilrc, pilot-link](https://github.com/meepingsnesroms/prc-tools-remix)
 
 ## License
+
+ * `CC BY-NC 3.0 US`
+   * Attribution is to:
+     * Emily "meepingsnesroms"
+     * Stephanie Gawroriski <xerthesquirrel@gmail.com>
+
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/3.0/us/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/us/">Creative Commons Attribution-NonCommercial 3.0 United States License</a>.
 
 ## Links
