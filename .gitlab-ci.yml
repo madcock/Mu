@@ -13,6 +13,26 @@
 # Inclusion templates, required for the build to work
 include:
   ################################## DESKTOPS ################################
+  # Windows 64-bit
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/windows-x64-mingw.yml'
+    
+  # Windows 32-bit
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/windows-i686-mingw.yml'
+
+  # Windows msvc10 64-bit
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/windows-x64-msvc10-msys2.yml'
+
+  # Windows msvc10 32-bit
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/windows-i686-msvc10-msys2.yml'
+
+  # Windows msvc05 32-bit
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/windows-i686-msvc05-msys2.yml'
+    
   # Linux 64-bit
   - project: 'libretro-infrastructure/ci-templates'
     file: '/linux-x64.yml'
@@ -21,14 +41,14 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/osx-x64.yml'
 
-  # Windows 64-bit
-  - project: 'libretro-infrastructure/ci-templates'
-    file: '/windows-x64-mingw.yml'
-
   ################################## CELLULAR ################################
   # Android
   - project: 'libretro-infrastructure/ci-templates'
     file: '/android-jni.yml'
+
+  # iOS 9
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/ios9.yml'
 
   ################################## CONSOLES ################################
   # Dingux (GCW Zero)
@@ -55,10 +75,6 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/libnx-static.yml'
 
-  # Nintendo Wii U
-  - project: 'libretro-infrastructure/ci-templates'
-    file: '/wiiu-static.yml'
-
   # PLayStation 2
   - project: 'libretro-infrastructure/ci-templates'
     file: '/ps2-static.yml'
@@ -66,6 +82,11 @@ include:
   # PlayStation Vita
   - project: 'libretro-infrastructure/ci-templates'
     file: '/vita-static.yml'
+
+  #################################### MISC ##################################
+  # Emscripten
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/emscripten-static.yml'
 
 # Stages for building
 stages:
@@ -78,6 +99,36 @@ stages:
 ##############################################################################
 
 ################################### DESKTOPS #################################
+# Windows 64-bit
+libretro-build-windows-x64:
+  extends:
+    - .libretro-windows-x64-mingw-make-default
+    - .core-defs
+
+# Windows 32-bit
+libretro-build-windows-i686:
+  extends:
+    - .libretro-windows-i686-mingw-make-default
+    - .core-defs
+
+# Windows msvc10 64-bit
+libretro-build-windows-msvc10-x64:
+  extends:
+    - .libretro-windows-x64-msvc10-msys2-make-default
+    - .core-defs
+
+# Windows msvc10 32-bit
+libretro-build-windows-msvc10-i686:
+  extends:
+    - .libretro-windows-i686-msvc10-msys2-make-default
+    - .core-defs
+
+# Windows msvc05 32-bit
+libretro-build-windows-msvc05-i686:
+  extends:
+    - .libretro-windows-i686-msvc05-msys2-make-default
+    - .core-defs
+    
 # Linux 64-bit
 libretro-build-linux-x64:
   extends:
@@ -88,12 +139,6 @@ libretro-build-linux-x64:
 libretro-build-osx-x64:
   extends:
     - .libretro-osx-x64-make-default
-    - .core-defs
-
-# Windows 64-bit
-libretro-build-windows-x64:
-  extends:
-    - .libretro-windows-x64-mingw-make-default
     - .core-defs
 
 ################################### CELLULAR #################################
@@ -121,6 +166,12 @@ android-x86:
     - .libretro-android-jni-x86
     - .core-defs
 
+# iOS 9
+libretro-build-ios9:
+  extends:
+    - .libretro-ios9-make-default
+    - .core-defs
+
 ################################### CONSOLES #################################
 # Dingux (GCW Zero)
 libretro-build-dingux:
@@ -129,7 +180,7 @@ libretro-build-dingux:
     - .core-defs
 
 # Nintendo 3DS
-libretro-build-3ds:
+libretro-build-ctr:
   extends:
     - .libretro-ctr-static-retroarch-master
     - .core-defs
@@ -168,4 +219,11 @@ libretro-build-ps2:
 libretro-build-vita:
   extends:
     - .libretro-vita-static-retroarch-master
+    - .core-defs
+
+#################################### MISC ##################################
+# Emscripten
+libretro-build-emscripten:
+  extends:
+    - .libretro-emscripten-static-retroarch-master
     - .core-defs
