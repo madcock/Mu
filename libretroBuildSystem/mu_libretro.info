@@ -1,6 +1,6 @@
 display_name = "Palm OS (Mu)"
 authors = "guicrith / meepingsnesroms; Stephanie Gawroriski (Xer Shadow Tail)"
-supported_extensions = "prc|pqa|img"
+supported_extensions = "prc|pqa|img|pdb"
 corename = "Mu"
 manufacturer = "Palm"
 categories = "Emulator"
