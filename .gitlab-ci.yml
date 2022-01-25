@@ -50,6 +50,10 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/ios9.yml'
 
+  # iOS
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/ios-arm64.yml'
+
   ################################## CONSOLES ################################
   # Dingux (GCW Zero)
   - project: 'libretro-infrastructure/ci-templates'
@@ -170,6 +174,12 @@ android-x86:
 libretro-build-ios9:
   extends:
     - .libretro-ios9-make-default
+    - .core-defs
+
+# iOS
+libretro-build-ios-arm64:
+  extends:
+    - .libretro-ios-arm64-make-default
     - .core-defs
 
 ################################### CONSOLES #################################
