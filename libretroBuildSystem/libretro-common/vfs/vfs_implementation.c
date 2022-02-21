@@ -55,7 +55,7 @@
 #  include <unistd.h>
 #endif
 
-#ifdef __CELLOS_LV2__
+#ifdef __PS3__
 #include <cell/cell_fs.h>
 #define O_RDONLY CELL_FS_O_RDONLY
 #define O_WRONLY CELL_FS_O_WRONLY
@@ -123,7 +123,7 @@ int64_t retro_vfs_file_seek_internal(libretro_vfs_implementation_file *stream, i
 /* VC2005 and up have a special 64-bit fseek */
 #ifdef ATLEAST_VC2005
       return _fseeki64(stream->fp, offset, whence);
-#elif defined(__CELLOS_LV2__) || defined(_MSC_VER) && _MSC_VER <= 1310
+#elif defined(__PS3__) || defined(_MSC_VER) && _MSC_VER <= 1310
       return fseek(stream->fp, (long)offset, whence);
 #else
       return fseeko(stream->fp, (off_t)offset, whence);
