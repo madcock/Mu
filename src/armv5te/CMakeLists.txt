@@ -13,6 +13,10 @@ add_library(MuCoreArmV5TEExperimental STATIC
 	mmu.c
 	thumb_interpreter.cpp)
 
+# Make this position independent so it can be linked into shared libraries
+set_property(TARGET MuCoreArmV5TEExperimental
+	PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 # Currently do not enable the dynamic recompiler
 set(NO_TRANSLATION)
 

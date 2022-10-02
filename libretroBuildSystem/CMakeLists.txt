@@ -1,6 +1,7 @@
 add_library(mu-libretro SHARED
 	libretro.c
 	cursors.c
+	miniz.c
 	libretro-common/compat/compat_strl.c
 	libretro-common/compat/compat_posix_string.c
 	libretro-common/compat/fopen_utf8.c
@@ -36,7 +37,7 @@ else()
 	set(MU_LIBRETRO_EXTENSION "")
 endif()
 
-## Target to run RetroArch with the SquirrelJME Core
+## Target to run RetroArch with the Mu Core
 if(DEFINED MU_LIBRETRO_DIR)
 	add_custom_target(RetroArch
 		DEPENDS mu-libretro

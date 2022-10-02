@@ -7,6 +7,10 @@ add_library(MuCoreM68k STATIC
 	m68kopnz.c
 	m68kops.c)
 
+# Make this position independent so it can be linked into shared libraries
+set_property(TARGET MuCoreM68k
+	PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 # Includes for the project
 target_include_directories(MuCoreM68k PUBLIC
 	"${PROJECT_BINARY_DIR}"

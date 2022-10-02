@@ -13,6 +13,10 @@ add_library(MuCore STATIC
 	tsc2101.c
 	w86l488.c)
 
+# Make this position independent so it can be linked into shared libraries
+set_property(TARGET MuCore
+	PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 # Bring all the sub-modules as needed
 target_link_libraries(MuCore
 	MuCorePxa260Experimental
