@@ -1,4 +1,4 @@
-add_library(mu-libretro SHARED
+add_library(mu_libretro SHARED
 	libretro.c
 	cursors.c
 	miniz.c
@@ -11,17 +11,15 @@ add_library(mu-libretro SHARED
 	libretro-common/string/stdstring.c
 	libretro-common/vfs/vfs_implementation.c)
 
-# Remove the "lib" prefix on Windows, it is incorrect
-if(CMAKE_SYSTEM_NAME STREQUAL Windows)
-	set_target_properties(mu-libretro PROPERTIES PREFIX "")
-endif()
+# Remove the "lib" prefix always, RetroArch does not name in this way
+set_target_properties(mu_libretro PROPERTIES PREFIX "")
 
 # Bring all the sub-modules as needed
-target_link_libraries(mu-libretro
+target_link_libraries(mu_libretro
 	MuCore)
 
 # Include the required includes
-target_include_directories(mu-libretro PUBLIC
+target_include_directories(mu_libretro PUBLIC
 	"${PROJECT_SOURCE_DIR}/include"
 	"libretro-common/include")
 
@@ -40,8 +38,8 @@ endif()
 ## Target to run RetroArch with the Mu Core
 if(DEFINED MU_LIBRETRO_DIR)
 	add_custom_target(RetroArch
-		DEPENDS mu-libretro
-		COMMAND "${MU_LIBRETRO_DIR}/retroarch${MU_LIBRETRO_EXTENSION}" "-v" "-L" "$<TARGET_FILE:mu-libretro>"
+		DEPENDS mu_libretro
+		COMMAND "${MU_LIBRETRO_DIR}/retroarch${MU_LIBRETRO_EXTENSION}" "-v" "-L" "$<TARGET_FILE:mu_libretro>"
 		WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
 		COMMENT "Starting RetroArch with Mu")
 endif()

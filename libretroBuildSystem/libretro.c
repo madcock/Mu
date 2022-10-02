@@ -18,7 +18,7 @@
 #include "silkscreen.h"
 #include "fileLauncher/launcher.h"
 #include "cursors.h"
-
+#include "miniz.h"
 
 #define JOYSTICK_DEADZONE 4000
 #define JOYSTICK_MULTIPLIER 0.0001
@@ -213,7 +213,7 @@ void retro_get_system_info(struct retro_system_info *info){
 #ifndef GIT_VERSION
 #define GIT_VERSION ""
 #endif
-   info->library_version  = "v1.3.0" GIT_VERSION;
+   info->library_version  = "v1.3.1" GIT_VERSION;
    info->need_fullpath    = true;
    info->valid_extensions = "prc|pqa|img|pdb|zip";
 
@@ -430,6 +430,198 @@ void retro_run(void){
       unrenderMouseCursor(touchCursorX, touchCursorY);
 }
 
+/**
+ * Tries to load a non-SRAM based content file, it will be installed into the
+ * system. This will handle the case where the content is a ZIP file in which
+ * if it is then it will load all of the contained PRCs and PDBs accordingly.
+ *
+ * @param error The error possibly.
+ * @param contentData The data being loaded.
+ * @param contentSize The size of the loaded content.
+ * @since 2022/10/02
+ */
+bool loadContentFileNonSRAM(uint32_t *error, uint8_t *contentData,
+							uint32_t contentSize) {
+	mz_zip_archive zipArchive;
+	mz_zip_archive_file_stat stat;
+	uint32_t appId = 0, maybeAppId, newError;
+	uint32_t numFiles, index, lookStage;
+	uint32_t fileNameLen;
+	void* entryBuf;
+
+	// Detect if this is a ZIP file, if it is
+	memset(&zipArchive, 0, sizeof(zipArchive));
+	if (mz_zip_reader_init_mem(&zipArchive,
+		contentData, contentSize,
+		MZ_ZIP_FLAG_DO_NOT_SORT_CENTRAL_DIRECTORY |
+		MZ_ZIP_FLAG_ASCII_FILENAME))
+	{
+		// Notice
+		log_cb(RETRO_LOG_INFO, "Loading from ZIP...\n");
+
+		// Process every file in the ZIP looking for PDBs, then PRCs
+		numFiles = mz_zip_reader_get_num_files(&zipArchive);
+		for (lookStage = 0; lookStage < 2; lookStage++)
+			for (index = 0; index < numFiles; index++)
+			{
+				// If we are failing then just fail here
+				if ((*error) != EMU_ERROR_NONE)
+				{
+					lookStage = 9999;
+					index = numFiles;
+					break;
+				}
+
+				// Get file information, only care about valid ones
+				memset(&stat, 0, sizeof(stat));
+				if (!mz_zip_reader_file_stat(&zipArchive,
+					index, &stat))
+					continue;
+
+				// Ignore directories and anything MiniZ does not support
+				if (!stat.m_is_supported || stat.m_is_directory)
+					continue;
+
+				// How long is the file name?
+				fileNameLen = strlen(stat.m_filename);
+
+				// Too short?
+				if (fileNameLen < 4)
+					continue;
+
+				// Not a PDB or PRC?
+				if (0 != strcasecmp((lookStage == 0 ? ".pdb" : ".prc"),
+					&stat.m_filename[fileNameLen - 4]))
+					continue;
+
+				// Allocate buffer for the data
+				entryBuf = malloc(stat.m_uncomp_size);
+				if (entryBuf == NULL)
+					return false;
+
+				// Load in data
+				memset(entryBuf, 0, stat.m_uncomp_size);
+				if (mz_zip_reader_extract_to_mem_no_alloc(&zipArchive,
+					index, entryBuf, stat.m_uncomp_size,
+					0, NULL, 0))
+				{
+					// Notice
+					log_cb(RETRO_LOG_INFO, "Installing from ZIP: %s\n",
+						stat.m_filename);
+
+					// Install the file
+					newError = launcherInstallFile(entryBuf,
+							stat.m_uncomp_size);
+
+					// Fill in error state
+					if (newError != EMU_ERROR_NONE)
+						(*error) = newError;
+
+					// If we are loading a PRC, get the appId of it so that we
+					// can launch it accordingly
+					if (lookStage == 1)
+					{
+						maybeAppId = launcherGetAppId(entryBuf,
+							stat.m_uncomp_size);
+						if (maybeAppId != 0)
+							appId = maybeAppId;
+					}
+				}
+
+				// Clear allocated data
+				free(entryBuf);
+			}
+
+		// Stop reading the ZIP
+		mz_zip_end(&zipArchive);
+	}
+
+	// Otherwise, not a ZIP at all... load it directly
+	else
+	{
+		// Notice
+		log_cb(RETRO_LOG_INFO, "Loading single PRC/PDB...\n");
+
+		// Install the file
+		(*error) = launcherInstallFile(contentData, contentSize);
+
+		// Get the app ID to launch
+		appId = launcherGetAppId(contentData, contentSize);
+	}
+
+	// Notice
+	log_cb(RETRO_LOG_INFO, "Completed load!\n");
+
+	// Try to the launch the app, if it even is one...
+	if ((*error) == EMU_ERROR_NONE && appId != 0)
+		(*error) = launcherExecute(appId);
+}
+
+bool loadContentFile(bool hasSram, uint32_t* error) {
+	struct RFILE *contentFile;
+	uint8_t *contentData;
+	uint32_t contentSize;
+
+	contentFile = filestream_open(contentPath, RETRO_VFS_FILE_ACCESS_READ,
+								  RETRO_VFS_FILE_ACCESS_HINT_NONE);
+	if (contentFile) {
+		contentSize = filestream_get_size(contentFile);
+		contentData = malloc(contentSize);
+
+		if (contentData)
+			filestream_read(contentFile, contentData, contentSize);
+		else
+			return false;
+		filestream_close(contentFile);
+	} else {
+		//no content at path, fail time
+		return false;
+	}
+
+	launcherBootInstantly(hasSram);
+
+	if (runningImgFile) {
+		char infoPath[PATH_MAX_LENGTH];
+		struct RFILE *infoFile;
+		uint8_t *infoData = NULL;
+		uint32_t infoSize = 0;
+		sd_card_info_t sdInfo;
+
+		memset(&sdInfo, 0x00, sizeof(sdInfo));
+
+		strlcpy(infoPath, contentPath, PATH_MAX_LENGTH);
+		infoPath[strlen(infoPath) - 4] = '\0';//chop off ".img"
+		strlcat(infoPath, ".info", PATH_MAX_LENGTH);
+		infoFile = filestream_open(infoPath, RETRO_VFS_FILE_ACCESS_READ,
+								   RETRO_VFS_FILE_ACCESS_HINT_NONE);
+		if (infoFile) {
+			infoSize = filestream_get_size(infoFile);
+			infoData = malloc(infoSize);
+
+			if (infoData)
+				filestream_read(infoFile, infoData, infoSize);
+
+			filestream_close(infoFile);
+		}
+
+		if (infoData)
+			launcherGetSdCardInfoFromInfoFile(infoData, infoSize, &sdInfo);
+		(*error) = emulatorInsertSdCard(contentData, contentSize,
+										infoData ? &sdInfo : NULL);
+		if (infoData)
+			free(infoData);
+	} else {
+		if (!hasSram)
+			loadContentFileNonSRAM(error, contentData, contentSize);
+	}
+
+	free(contentData);
+	if ((*error) != EMU_ERROR_NONE)
+		return false;
+
+	return true;
+}
+
 bool retro_load_game(const struct retro_game_info *info){
    uint8_t* romData;
    uint32_t romSize;
@@ -555,68 +747,10 @@ bool retro_load_game(const struct retro_game_info *info){
    emulatorSetRtc(timeInfo->tm_yday, timeInfo->tm_hour, timeInfo->tm_min, timeInfo->tm_sec);
    
    //see if RetroArch wants something launched
-   if(info && !string_is_empty(info->path)){
-      struct RFILE* contentFile;
-      uint8_t* contentData;
-      uint32_t contentSize;
-      
-      contentFile = filestream_open(contentPath, RETRO_VFS_FILE_ACCESS_READ, RETRO_VFS_FILE_ACCESS_HINT_NONE);
-      if(contentFile){
-         contentSize = filestream_get_size(contentFile);
-         contentData = malloc(contentSize);
-         
-         if(contentData)
-            filestream_read(contentFile, contentData, contentSize);
-         else
-            return false;
-         filestream_close(contentFile);
-      }
-      else{
-         //no content at path, fail time
-         return false;
-      }
-      
-      launcherBootInstantly(hasSram);
-
-      if(runningImgFile){
-         char infoPath[PATH_MAX_LENGTH];
-         struct RFILE* infoFile;
-         uint8_t* infoData     = NULL;
-         uint32_t infoSize     = 0;
-         sd_card_info_t sdInfo;
-         
-         memset(&sdInfo, 0x00, sizeof(sdInfo));
-         
-         strlcpy(infoPath, contentPath, PATH_MAX_LENGTH);
-         infoPath[strlen(infoPath) - 4] = '\0';//chop off ".img"
-         strlcat(infoPath, ".info", PATH_MAX_LENGTH);
-         infoFile = filestream_open(infoPath, RETRO_VFS_FILE_ACCESS_READ, RETRO_VFS_FILE_ACCESS_HINT_NONE);
-         if(infoFile){
-            infoSize = filestream_get_size(infoFile);
-            infoData = malloc(infoSize);
-            
-            if(infoData)
-               filestream_read(infoFile, infoData, infoSize);
-
-            filestream_close(infoFile);
-         }
-         
-         if(infoData)
-            launcherGetSdCardInfoFromInfoFile(infoData, infoSize, &sdInfo);
-         error = emulatorInsertSdCard(contentData, contentSize, infoData ? &sdInfo : NULL);
-         if(infoData)
-            free(infoData);
-      }
-      else{
-         if(!hasSram)
-            error = launcherInstallFile(contentData, contentSize);
-         if(error == EMU_ERROR_NONE)
-            error = launcherExecute(launcherGetAppId(contentData, contentSize));
-      }
-      
-      free(contentData);
-      if(error != EMU_ERROR_NONE)
-         return false;
+   if(info && !string_is_empty(info->path)) {
+	   if (!loadContentFile(hasSram, &error)) {
+	   		return false;
+	   }
    }
    
    //set the time callback
