@@ -53,6 +53,9 @@ Make sure you have done all the steps here https://docs.libretro.com/ under "For
     cd ./libretroBuildSystem
     make
 
+To load multiple files at once, place PRCs and PDBs into a ZIP file and then
+load that ZIP file. PDBs will be installed first followed by PRC files.
+
 #### For Qt
 
 First install _Qt 5.14.2_, you may optional install as well _Qt Creator_.
@@ -127,4 +130,4 @@ bootloader-dbvz.rom: 9da101cd2317830649a31f8fa46debec (MD5)
 [Discord](https://discord.gg/hWSz8VN)
 
 ## Also see Mu's sister project
-[🐿SquirrelJME](https://multiphasicapps.net)
+[🐿SquirrelJME](https://squirreljme.cc/)
