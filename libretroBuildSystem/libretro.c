@@ -215,7 +215,11 @@ void retro_get_system_info(struct retro_system_info *info){
 #endif
    info->library_version  = "v1.3.0" GIT_VERSION;
    info->need_fullpath    = true;
-   info->valid_extensions = "prc|pqa|img";
+   info->valid_extensions = "prc|pqa|img|pdb|zip";
+
+   // Prevent RetroArch from looking within ZIP files, so we can grab all
+   // the PRCs and PDBs accordingly as a single group
+   info->block_extract = true;
 }
 
 void retro_get_system_av_info(struct retro_system_av_info *info){
