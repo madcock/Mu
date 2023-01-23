@@ -127,12 +127,27 @@ ifeq ($(arch),ppc)
 		CFLAGS += -D__ppc__ -DMSB_FIRST -DWORDS_BIGENDIAN=1
 endif
 	OSXVER = $(shell sw_vers -productVersion | cut -d. -f 2)
+	OSX_LT_MAVERICKS = $(shell (( $(OSXVER) <= 9)) && echo "YES")
 	OSX_GT_MOJAVE = $(shell (( $(OSXVER) >= 14)) && echo "YES")
-ifneq ($(OSX_GT_MOJAVE),YES)
-	#this breaks compiling on Mac OS Mojave
-	fpic += -mmacosx-version-min=10.1
-endif
+
+    ifeq ($(OSX_LT_MAVERICKS),"YES")
+        fpic += -mmacosx-version-min=10.5
+    else
+        ifneq ($(OSX_GT_MOJAVE),YES)
+            #this breaks compiling on Mac OS Mojave
+            fpic += -mmacosx-version-min=10.1
+        endif
+    endif
+
 	SHARED := -dynamiclib
+
+    ifeq ($(CROSS_COMPILE),1)
+        TARGET_RULE   = -target $(LIBRETRO_APPLE_PLATFORM) -isysroot $(LIBRETRO_APPLE_ISYSROOT)
+        CFLAGS   += $(TARGET_RULE)
+        CPPFLAGS += $(TARGET_RULE)
+        CXXFLAGS += $(TARGET_RULE)
+        LDFLAGS  += $(TARGET_RULE)
+    endif
 
 # iOS
 else ifneq (,$(findstring ios,$(platform)))
