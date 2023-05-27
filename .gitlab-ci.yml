@@ -58,6 +58,10 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/ios-arm64.yml'
 
+  # tvOS
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/tvos-arm64.yml'
+
   ################################## CONSOLES ################################
   # Dingux (GCW Zero)
   - project: 'libretro-infrastructure/ci-templates'
@@ -190,6 +194,12 @@ libretro-build-ios9:
 libretro-build-ios-arm64:
   extends:
     - .libretro-ios-arm64-make-default
+    - .core-defs
+
+# tvOS
+libretro-build-tvos-arm64:
+  extends:
+    - .libretro-tvos-arm64-make-default
     - .core-defs
 
 ################################### CONSOLES #################################
