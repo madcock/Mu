@@ -393,7 +393,9 @@ else ifneq (,$(findstring armv,$(platform)))
 # Emscripten
 else ifeq ($(platform), emscripten)
 	TARGET := $(TARGET_NAME)_libretro_emscripten.bc
+	AR=emar
 	STATIC_LINKING = 1
+	STATIC_LINKING_LINK = 1
 
 # GCW0
 else ifeq ($(platform), gcw0)
@@ -537,9 +539,7 @@ all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	@echo "** BUILDING $(TARGET) FOR PLATFORM $(platform) **"
-ifeq ($(platform), emscripten)
-	$(CC) $(CFLAGS) $(OBJOUT)$@ $^
-else ifeq ($(STATIC_LINKING_LINK), 1)
+ifeq ($(STATIC_LINKING_LINK), 1)
 ifneq (,$(findstring msvc,$(platform)))
 	$(LD) $(LINKOUT)$@ $(OBJECTS)
 else
